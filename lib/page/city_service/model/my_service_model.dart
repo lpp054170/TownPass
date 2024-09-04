@@ -164,7 +164,7 @@ extension MyServiceIdExt on MyServiceItemId {
       MyServiceItemId.manual => MyServiceItem(
           title: '媽媽手冊',
           description: '資訊',
-          icon: Assets.svg.iconLibraryBorrow.svg(),
+          icon: Assets.svg.iconManual.svg(),
           category: MyServiceCategory.cityLife,
           destinationUrl: 'http://localhost:8080/ ',
         ),
