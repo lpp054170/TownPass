@@ -1,6 +1,5 @@
 import 'package:town_pass/bean/subscription.dart';
 import 'package:town_pass/util/tp_app_bar.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';

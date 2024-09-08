@@ -28,7 +28,7 @@ enum MyServiceItemId {
   library,
   locationSearch,
   zoo,
-  manual,
+  manual
   ;
 }
 
@@ -162,11 +162,11 @@ extension MyServiceIdExt on MyServiceItemId {
           destinationUrl: '',
         ),
       MyServiceItemId.manual => MyServiceItem(
-          title: '媽媽手冊',
-          description: '資訊',
-          icon: Assets.svg.iconManual.svg(),
+          title: '台北小杜鵑育兒通',
+          description: '提供孕婦產檢資訊、育兒日誌等相關服務',
+          icon: Assets.svg.mom.svg(),
           category: MyServiceCategory.cityLife,
-          destinationUrl: 'http://localhost:8080/ ',
+          destinationUrl: 'http://192.168.88.78:3333/',
         ),
       MyServiceItemId.locationSearch => MyServiceItem(
           title: '找地點',

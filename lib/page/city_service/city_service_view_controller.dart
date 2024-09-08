@@ -49,7 +49,7 @@ MosaicTileService get _defaultStaticService => const MosaicTileService(
         MosaicTileServiceItem(
           mainText: '市政APP',
           subText: 'More',
-          url: '',
+          url: 'https://taipei-pass-service.vercel.app/surrounding-service/',
           icon: 'assets/svg/icon_more.svg',
         ),
         MosaicTileServiceItem(

@@ -8,7 +8,6 @@ import 'package:town_pass/util/tp_route.dart';
 import 'package:town_pass/service/shared_preferences_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 
 void main() async {

@@ -35,35 +35,55 @@ class TPWebView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: TPAppBar(
-        backgroundColor: TPColors.primary500,
-        foregroundColor: TPColors.white,
-        leading: Obx(
-          () => switch (canGoBack.value) {
-            true => IconButton(
-                icon: Assets.svg.expand.svg(),
-                onPressed: () async => await webViewController.value?.goBack(),
-                style: const ButtonStyle(
-                  iconSize: WidgetStatePropertyAll<double>(24),
+  bool isSpecialUrl = url == 'https://28c584a8b6e9625aa0669c58fad97d07.serveo.net/';
+  return Scaffold(
+  appBar: isSpecialUrl
+      ? null
+      : PreferredSize(
+          preferredSize: const Size.fromHeight(kToolbarHeight), // Default AppBar height
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              // Capture the AppBar's width and height
+              double appBarWidth = constraints.maxWidth;
+              double appBarHeight = constraints.maxHeight;
+
+              // You can print or return the dimensions as needed
+              print("AppBar width: $appBarWidth");
+              print("AppBar height: $appBarHeight");
+
+              return TPAppBar(
+                backgroundColor: TPColors.primary500,
+                foregroundColor: TPColors.white,
+                leading: Obx(
+                  () => switch (canGoBack.value) {
+                    true => IconButton(
+                        icon: Assets.svg.expand.svg(),
+                        onPressed: () async => await webViewController.value?.goBack(),
+                        style: const ButtonStyle(
+                          iconSize: WidgetStatePropertyAll<double>(24),
+                        ),
+                      ),
+                    false => const SizedBox.shrink(),
+                  },
                 ),
-              ),
-            false => const SizedBox.shrink(),
-          },
-        ),
-        actions: [
-          CloseButton(
-            color: TPColors.white,
-            onPressed: () => Get.back(),
-            style: const ButtonStyle(
-              iconSize: WidgetStatePropertyAll<double>(24),
-            ),
+                actions: [
+                  CloseButton(
+                    color: TPColors.white,
+                    onPressed: () => Get.back(),
+                    style: const ButtonStyle(
+                      iconSize: WidgetStatePropertyAll<double>(24),
+                    ),
+                  ),
+                ],
+                title: appBarController.title.value,
+                controller: appBarController,
+              );
+            },
           ),
-        ],
-        title: appBarController.title.value,
-        controller: appBarController,
-      ),
-      body: TPInAppWebView(
+        ),
+  body: Stack(
+    children: [
+      TPInAppWebView(
         onWebViewCreated: (controller) {
           webViewController.value = controller;
           try {
@@ -77,12 +97,26 @@ class TPWebView extends StatelessWidget {
         },
         onTitleChanged: (_, title) => appBarController.title.value = title,
         onGeolocationPermissionsShowPrompt: (controller, origin) async {
-          // should be deal individually (ask for user agreement)
           return GeolocationPermissionShowPromptResponse(origin: origin, allow: true, retain: true);
         },
       ),
-    );
-  }
+      if (isSpecialUrl)
+        Positioned(
+          top: 40,
+          right: 0,
+          child: CloseButton(
+            color: const Color.fromARGB(255, 180, 51, 51),
+            onPressed: () => Get.back(),
+            style: const ButtonStyle(
+              iconSize: WidgetStatePropertyAll<double>(24),
+            ),
+          ),
+        ),
+    ],
+  ),
+);
+
+}
 }
 
 class TPInAppWebView extends StatelessWidget {

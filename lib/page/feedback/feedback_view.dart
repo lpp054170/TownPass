@@ -15,7 +15,7 @@ class FeedbackView extends GetView<FeedbackViewController> {
 
   @override
   Widget build(BuildContext context) {
-    DropdownMenu(
+    const DropdownMenu(
       dropdownMenuEntries: [],
     );
     return Scaffold(
@@ -44,7 +44,7 @@ class FeedbackView extends GetView<FeedbackViewController> {
                   .toList(),
               hintText: '請選擇建議類型',
               textStyle: TPTextStyles.h3SemiBold,
-              inputDecorationTheme: InputDecorationTheme(border: InputBorder.none),
+              inputDecorationTheme: const InputDecorationTheme(border: InputBorder.none),
               menuStyle: MenuStyle(
                 backgroundColor: WidgetStateProperty.all(TPColors.grayscale50),
               ),
